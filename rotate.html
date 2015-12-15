@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>rotate</title>
+	<style type="text/css">
+		#box{
+			width: 100px;
+			height: 100px;
+			background: lightblue;
+			margin:100px auto;
+		}
+		p{
+			width: 300px;
+			margin:0 0 10px 400px;
+			color: red;
+/*			color: white;
+			text-shadow: 2px 2px 10px red;
+*/		}
+		input[type*=range]{
+			width: 520px;
+			margin-left: 400px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function () {
+			var oBox=document.getElementById('box');
+			var aSpan=document.querySelectorAll('p>span:first-child');
+			var aInp=document.querySelectorAll('input[type|=range]');
+			var rotate={
+				x:0,
+				y:0,
+				z:0
+			};
+			[].forEach.call(aInp,function(oInp){
+				oInp.addEventListener('mousedown',function(){
+					this.addEventListener('mousemove',function(){
+						rotate[this.dataset.rotate]=this.value;
+					oBox.style.transform='rotateX('+rotate.x+'deg) rotateY('+rotate.y+'deg) rotateZ('+rotate.z+'deg)';
+					},false);
+					
+				},false);
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+	<p>rotate X:<span> 0deg</span></p>
+	<input type="range" min="-360" max="360" value="0" data-rotate="x">
+	<p>rotate Y:<span> 0deg</span></p>
+	<input type="range" min="-360" max="360" value="0" data-rotate="y">
+	<p>rotate Z:<span> 0deg</span></p>
+	<input type="range" min="-360" max="360" value="0" data-rotate="z">
+</body>
+</html>
